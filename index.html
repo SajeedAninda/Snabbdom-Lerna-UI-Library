@@ -9,24 +9,19 @@
   <div id="app"></div>
   <script src="https://unpkg.com/snabbdom"></script>
   <script>
-    // UI Library Implementation
     const { init, h } = window.snabbdom;
     
-    // Initialize Snabbdom
     const patch = init([]);
 
-    // Component state
     let state = {
       count: 0
     };
 
-    // Function to update state
     const updateState = (newState) => {
       state = { ...state, ...newState };
-      render(); // Call render to update the view
+      render();
     };
 
-    // Function to create a template for the view
     const createTemplate = () => {
       return h('div', [
         h('h1', state.count),
@@ -34,22 +29,18 @@
       ]);
     };
 
-    // Function to handle button click and increment count
     const incrementCount = () => {
       updateState({ count: state.count + 1 });
     };
 
-    // Function to render the template
     const render = () => {
       const newVNode = createTemplate();
-      patch(oldVNode, newVNode); // Patch the changes to the DOM
-      oldVNode = newVNode; // Update oldVNode for next patch
+      patch(oldVNode, newVNode); 
+      oldVNode = newVNode; 
     };
 
-    // Initialize oldVNode as an empty div
     let oldVNode = document.createElement('div');
 
-    // Mount the component and render it initially
     document.addEventListener('DOMContentLoaded', () => {
       render();
       console.log('Component mounted');
